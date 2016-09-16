@@ -22,39 +22,38 @@ int sign(double x)
         return 1;
 }
 
-
 void dda(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(1.0f, 0.0f, 0.0f);
     float x,y,dx,dy,len;
-    for(j=0;j<n;j++)
+    for(j=0; j<n; j++)
     {
-        if(abs(X1[j+1]-X1[j])>abs(Y1[j+1]-Y1[j+1]))
-            len=abs(X1[j+1]-X1[j]);
+        if(abs(X1[j+1]-X1[j]) > abs(Y1[j+1]-Y1[j+1]))
+            len = abs(X1[j+1]-X1[j]);
         else
-            len=abs(Y1[j+1]-Y1[j]);
-        dx=(X1[j+1]-X1[j])/len;
-        dy=(Y1[j+1]-Y1[j])/len;
-        x=X1[j]+0.5*sign(dx);
-        y=Y1[j]+0.5*sign(dy);
-        int i=1;
+            len = abs(Y1[j+1]-Y1[j]);
+        dx = (X1[j+1]-X1[j])/len;
+        dy = (Y1[j+1]-Y1[j])/len;
+        x = X1[j]+0.5*sign(dx);
+        y = Y1[j]+0.5*sign(dy);
+        int i = 1;
         glBegin(GL_POINTS);
         while(i<=len)
         {
             glVertex2d(x,y);
             cout<<x<<","<<y<<endl;
-            x=x+dx;
-            y=y+dy;
-            i=i+1;
+            x = x+dx;
+            y = y+dy;
+            i = i+1;
         }
         glEnd();
     }
     glFlush();
     cout<<"Enter the coordinates of seed pixel:";
     cin>>sx>>sy;
-    ins=checkinside(sx,sy);
-    if(ins==true)
+    ins = checkinside(sx,sy);
+    if(ins == true)
     {
         cout<<"The seed pixel is inside";
         seed(sx,sy);
@@ -69,18 +68,17 @@ void dda(void)
 bool checkinside(int a, int b)
 {
     bool z;
-    for (int i = a; i >= 0; i--) {
+    for(int i=a; i>=0; i--) 
+	{
         glReadPixels(i, b, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
         int r = (int)pixel[0], g= (int)pixel[1], b = (int)pixel[2];
-        if (r == 255 && g == 0 && b == 0) {
+        if (r == 255 && g == 0 && b == 0)
             cnt++;
-        }
     }
     if (cnt % 2 != 0)
         z=true;
     else
         z=false;
-    
     return z;
 }
 
@@ -100,48 +98,27 @@ void seed(int x, int y)
     glBegin(GL_POINTS);
     glVertex2d(x, y);
     glEnd();
-    glReadPixels(x + 1, y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
+    glReadPixels(x+1, y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
     int r = (int)pixel[0], g = (int)pixel[1], b = (int)pixel[2];
-    if( (r == 255 && g == 255 && b== 255)){
-        seed(x + 1, y);
-    }
-    /*glReadPixels(x+1, y+1, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
+    if(r == 255 && g == 255 && b== 255)
+        seed(x+1, y);
+
+    glReadPixels(x, y+1, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
     r = (int)pixel[0], g = (int)pixel[1], b = (int)pixel[2];
-    if ((r == 255 && g == 255 && b == 255)) {
-        seed(x+1, y+1);
-    }*/
-    glReadPixels(x, y + 1, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
-    r = (int)pixel[0], g = (int)pixel[1], b = (int)pixel[2];
-    if ((r == 255 && g == 255 && b == 255)) {
-        seed(x, y + 1);
-    }/*
-    glReadPixels(x-1, y + 1, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
-    r = (int)pixel[0], g = (int)pixel[1], b = (int)pixel[2];
-    if ((r == 255 && g == 255 && b == 255)) {
-        seed(x-1, y + 1);
-    }*/
+    if(r == 255 && g == 255 && b == 255)
+        seed(x, y+1);
+
     glReadPixels(x-1, y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
     r = (int)pixel[0], g = (int)pixel[1], b = (int)pixel[2];
-    if ((r == 255 && g == 255 && b == 255)) {
+    if(r == 255 && g == 255 && b == 255)
             seed(x-1, y);
-    }/*
-    glReadPixels(x-1, y - 1, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
-    r = (int)pixel[0], g = (int)pixel[1], b = (int)pixel[2];
-    if ((r == 255 && g == 255 && b == 255)) {
-        seed(x-1, y - 1);
-    }*/
+
     glReadPixels(x, y-1, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
     r = (int)pixel[0], g = (int)pixel[1], b = (int)pixel[2];
-    if ((r == 255 && g == 255 && b == 255)) {
-        seed(x, y - 1);
-    }/*
-    glReadPixels(x+1, y - 1, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
-    r = (int)pixel[0], g = (int)pixel[1], b = (int)pixel[2];
-    if ((r == 255 && g == 255 && b == 255)) {
-        seed(x+1, y - 1);
-    }*/
-}
+    if(r == 255 && g == 255 && b == 255)
+        seed(x, y-1);
 
+}
 
 int main(int argc, char **argv)
 {
