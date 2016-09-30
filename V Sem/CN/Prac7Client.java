@@ -21,9 +21,9 @@ public class ClientMain
     		socket = new Socket("localhost",6666);
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             DataInputStream dis = new DataInputStream(socket.getInputStream());
-            System.out.print("Client2: ");
+            System.out.print("Client1: ");
             msgFrmClient = sc.nextLine();
-            dos.writeInt(2);
+            dos.writeInt(1);
             dos.writeUTF(msgFrmClient);
             msgFrmServer = dis.readUTF();
             System.out.println("Server: " + msgFrmServer);
