@@ -1,132 +1,166 @@
 #include <iostream>
 #include <math.h>
 #include <GL/glut.h>
+#include<GL/samarth.h>
 
-void mid(int x1,int y1,int x2, int y2)
+using namespace std;
+
+Point window[4];
+
+void mid(Point line[2])
 {
     double yl,yr,xb,xt,m;
-	int xl=100,xr=200,yb=100,yt=200;
-	int p1[4],p2[4];
-	if(x1<xl)
-		p1[0]=1;
-	if(x1>xr)
-		p1[1]=1;
-	if(y1<yb)
-		p1[2]=1;
-	if(y1>yt)
-		p1[3]=1;
-	if(x2<xl)
-		p2[0]=1;
-	if(x2>xr)
-		p2[1]=1;
-	if(y2<yb)
-		p2[2]=1;
-	if(y2>yt)
-		p2[3]=1;
+	int xl=window[0].x, xr=window[3].x, yb=window[0].y, yt=window[3].y;
+	int p1code[4],p2code[4];
+	if(line[0].x <= xl)
+		p1code[0] = 1;
+	else
+		p1code[0] = 0;
+	if(line[0].x >= xr)
+		p1code[1] = 1;
+	else
+		p1code[1] = 0;
+	if(line[0].y <= yb)
+		p1code[2] = 1;
+	else
+		p1code[2] = 0;
+	if(line[0].y >= yt)
+		p1code[3] = 1;
+	else
+		p1code[3] = 0;
+	if(line[1].x <= xl)
+		p2code[0] = 1;
+	else
+		p2code[0] = 0;
+	if(line[1].x >= xr)
+		p2code[1] = 1;
+	else
+		p2code[1] = 0;
+	if(line[1].y <= yb)
+		p2code[2] = 1;
+	else
+		p2code[2] = 0;
+	if(line[1].y >= yt)
+		p2code[3] = 1;
+	else
+		p2code[3] = 0;
 	
-	//finding the intersection
-	m=(y2-y1)/(x2-x1);
-	//left edge
-	yl=(m*(xl-x1))+y1;
-	//right edge
-	yr=(m*(xr-x1))+y1;
-	//bottom edge
-	xb=((yb-y1)/m)+(x1);
-	//top edge
-	xt=((yt-y1)/m)+(x1);
-	
-	double a,b,c,d;
-	if((yl<200 && yl>100) && (yr<200 && yr>100))
+	//Check Visibility
+	if(p1code[0]==0 && p1code[1]==0 && p1code[2]==0 && p1code[3]==0 && p2code[0]==0 && p2code[1]==0 && p2code[2]==0 && p2code[3]==0)
+		cout<<"\n\nCompletly visible. No intersection points!!!";
+	else if(p1code[0]==p2code[0] && p1code[1]==p2code[1] && p1code[2]==p2code[2] && p1code[3]==p2code[3])
+		cout<<"\n\nCompletly invisible. No intersection points!!!";
+	else
 	{
+		cout<<"\n\nPartialy Visible";
 		
-		a = xl;
-		b = yl;
-		c = xr;
-		d = yr;
-		
-	}
-	if((yl<200 && yl>100) && (xb<200 && xb>100))
-	{
-		a = xl;
-		b = yl;
-		c = xb;
-		d = yb;
-	}
-	if((yl<200 && yl>100) && (xt<200 && xt>100))
-	{
-		a = xl;
-		b = yl;
-		c = xt;
-		d = yt;
-	}
-	if((yr<200 && yr>100) && (xb<200 && xb>100))
-	{
-		a = xr;
-		b = yr;
-		c = xb;
-		d = yb;
-	}
-	
-	if((yr<200 && yr>100) && (xt<200 && xt>100))
-	{
-		a = xr;
-		b = yr;
-		c = xt;
-		d = yt;
-	}
+		//finding the intersection
+		m = (line[1].y-line[0].y)/(line[1].x-line[0].x);
+		//left edge
+		yl = (m*(xl-line[0].x))+line[0].y;
+		//right edge
+		yr = (m*(xr-line[0].x))+line[0].y;
+		//bottom edge
+		xb = ((yb-line[0].y)/m)+(line[0].x);
+		//top edge
+		xt = ((yt-line[0].y)/m)+(line[0].x);
 
-	if((xb<200 && xb>100) && (xt<200 && xt>100))
-	{
-		a = xb;
-		b = yb;
-		c = xt;
-		d = yt;
-	}
+		Point newLine[2];
+		if((yl<window[2].y && yl>window[0].y) && (yr<window[2].y && yr>window[0].y))
+		{
+			newLine[0].x = xl;
+			newLine[0].y = yl;
+			newLine[1].x = xr;
+			newLine[1].y = yr;
 		
-		
-	glColor3f(0.0f, 0.0f, 0.0f); 
-    glBegin(GL_LINE_LOOP);
-    glVertex2d(300,300);
-    glVertex2d(400,300);
-    glVertex2d(400,400);
-    glVertex2d(300,400);
-    glEnd();
-	
-	glBegin(GL_LINES);
-		glVertex2d(a+200,b+200);
-		glVertex2d(c+200,d+200);
-    glEnd();
-	glFlush();
+		}
+		if((yl<window[2].y && yl>window[0].y) && (xb<window[2].x && xb>window[0].x))
+		{
+			newLine[0].x = xl;
+			newLine[0].y = yl;
+			newLine[1].x = xb;
+			newLine[1].y = yb;
+		}
+		if((yl<window[2].y && yl>window[0].y) && (xt<window[2].x && xt>window[0].x))
+		{
+			newLine[0].x = xl;
+			newLine[0].y = yl;
+			newLine[1].x = xt;
+			newLine[1].y = yt;
+		}
+		if((yr<window[2].y && yr>window[0].y) && (xb<window[2].x && xb>window[0].x))
+		{
+			newLine[0].x = xr;
+			newLine[0].y = yr;
+			newLine[1].x = xb;
+			newLine[1].y = yb;
+		}
+		if((yr<window[2].y && yr>window[0].y) && (xt<200 && xt>window[0].x))
+		{
+			newLine[0].x = xr;
+			newLine[0].y = yr;
+			newLine[1].x = xt;
+			newLine[1].y = yt;
+		}
+		if((xb<window[2].x && xb>window[0].x) && (xt<window[2].x && xt>window[0].x))
+		{
+			newLine[0].x = xb;
+			newLine[0].y = yb;
+			newLine[1].x = xt;
+			newLine[1].y = yt;
+		}
+		cout<<"\nIntersection points: "<<newLine[0].x<<" "<<newLine[0].y<<"    "<<newLine[1].x<<" "<<newLine[1].y;
 
-	
+		Point temp1[4], temp2[2];
+		Transformation t;
+		t.translate(4, window, temp1, 250, 200);
+		t.translate(2, newLine, temp2, 250, 200);
+		
+		glColor3f(0.0,0.0,0.0);//black
+		glBegin(GL_POINTS);
+		for(int i=0; i<4; i++)
+		{
+			dda l;
+			l.line(temp1[i].x,temp1[i].y,temp1[(i+1)%4].x,temp1[(i+1)%4].y);	
+		}
+		glEnd();
+		glFlush();
+
+		glColor3f(0.0,0.0,0.0);//black
+		glBegin(GL_POINTS);
+		dda l;
+		l.line(temp2[0].x, temp2[0].y, temp2[1].x, temp2[1].y);
+		glEnd();
+		glFlush();
+	}
 }
 
-
-
 void Clipping(void)
-{
-    int x1,y1,x2,y2;
-    printf("Enter x & y coordinates of p1:");
-    scanf("%d %d",&x1,&y1);
-    printf("Enter x & y coordinates of p2:");
-    scanf("%d %d",&x2,&y2);
-	
+{	
 	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(0.0f, 0.0f, 0.0f); 
-    glBegin(GL_LINE_LOOP);
-    glVertex2d(100,100);
-    glVertex2d(200,100);
-    glVertex2d(200,200);
-    glVertex2d(100,200);
-    glEnd();
-
-    glBegin(GL_LINES);
-    glVertex2d(x1,y1);
-    glVertex2d(x2,y2);
-    glEnd();
+	glColor3f(0.0,0.0,0.0);//black
+	glBegin(GL_POINTS);
+	for(int i=0; i<4; i++)
+	{
+		dda l;
+		l.line(window[i].x,window[i].y,window[(i+1)%4].x,window[(i+1)%4].y);	
+	}
+	glEnd();
 	glFlush();
 
-	mid(x1, y1, x2, y2);
+	Point line[2];
+    cout<<"Enter x & y coordinates of p1:";
+    cin>>line[0].x>>line[0].y;
+    cout<<"Enter x & y coordinates of p2:";
+    cin>>line[1].x>>line[1].y;
+    glColor3f(0.0,0.0,0.0);//black
+	glBegin(GL_POINTS);
+	dda l;
+	l.line(line[0].x, line[0].y, line[1].x, line[1].y);
+	glEnd();
+	glFlush();
+
+	mid(line);
 }
 void Init()
 {
@@ -145,6 +179,11 @@ int main(int argc, char **argv)
 	glutInitWindowPosition(0,0);
 	glutCreateWindow("Clipping");
 	Init();
+
+	cout<<"Enter the co-ordinates of Window:-\n";
+	for(int i=0; i<4; i++)
+		cin>>window[i].x>>window[i].y;
+
 	glutDisplayFunc(Clipping);
 	glutMainLoop(); // Enters the Glut event processing loop
 	return 0;
