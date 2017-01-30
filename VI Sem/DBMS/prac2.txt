@@ -1,4 +1,12 @@
+﻿QUERY(1) Write and execute the DDL statements to create SalesCo database. Ensure that you enforce the specified constraints (entity-integrity, referential integrity, domain, unique, and not null along with defaults if any).
 SQL> 
+SQL> DROP TABLE CUSTOMER CASCADE CONSTRAINTS;
+DROP TABLE CUSTOMER CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
 SQL> CREATE TABLE CUSTOMER(
   2  	     C_CODE NUMBER(5),
   3  	     LNAME VARCHAR2(10) NOT NULL,
@@ -12,6 +20,14 @@ SQL> CREATE TABLE CUSTOMER(
  11  );
 
 Table created.
+
+SQL> 
+SQL> DROP TABLE VENDOR CASCADE CONSTRAINTS;
+DROP TABLE VENDOR CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
 
 SQL> CREATE TABLE VENDOR (
   2  	     V_CODE NUMBER(5),
@@ -29,6 +45,14 @@ SQL> CREATE TABLE VENDOR (
 
 Table created.
 
+SQL> 
+SQL> DROP TABLE INVOICE CASCADE CONSTRAINTS;
+DROP TABLE INVOICE CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
 SQL> CREATE TABLE INVOICE (
   2  	     INV_NUM NUMBER(4),
   3  	     C_CODE NUMBER(5),
@@ -39,6 +63,14 @@ SQL> CREATE TABLE INVOICE (
   8  );
 
 Table created.
+
+SQL> 
+SQL> DROP TABLE PRODUCT CASCADE CONSTRAINTS;
+DROP TABLE PRODUCT CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
 
 SQL> CREATE TABLE PRODUCT (
   2  	     P_CODE CHAR(5),
@@ -56,6 +88,14 @@ SQL> CREATE TABLE PRODUCT (
 
 Table created.
 
+SQL> 
+SQL> DROP TABLE LINE CASCADE CONSTRAINTS;
+DROP TABLE LINE CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
 SQL> CREATE TABLE LINE (
   2  	     INV_NUM NUMBER(4),
   3  	     L_NUM NUMBER(1),
@@ -72,45 +112,74 @@ SQL> CREATE TABLE LINE (
 
 Table created.
 
+QUERY(2) Populate the database with above mentioned sample contents. You must ensure that tables without referential integrity constraints are populated first. You may use .SQL file to store database population INSERT scripts and execute it at one go).
 SQL> 
-SQL> COMMIT;
+SQL> DELETE FROM CUSTOMER;
 
-Commit complete.
+0 rows deleted.
 
-SQL>
-SQL> INSERT all
-  2  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE) VALUES(10010, 'Anderson', 'James', 615, 2933893, 0.00)
-  3  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE) VALUES(10011, 'Kurtis', 'Elena', 713, 2753455, 0.00)
-  4  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE) VALUES(10012, 'Smith', 'Kathy', 615, 2873453, 345.86)
-  5  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE) VALUES(10013, 'Paul', 'Chris', 615, 2879998, 536.75)
-  6  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE) VALUES(10014, 'Johnson', 'Bill', 615, 2455533, 0.00)
-  7  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE) VALUES(10015, 'Samuels', 'Julia', 713, 2345432, 0.00)
-  8  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE) VALUES(10016, 'Harris', 'Anne', 615, 2233445, 221.19)
-  9  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE) VALUES(10017, 'Ford', 'Gustav', 615, 2223444, 768.93)
- 10  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE) VALUES(10018, 'Lee', 'Ming', 713, 2323234, 216.55)
- 11  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE) VALUES(10019, 'Green', 'Walter', 615, 2786403, 0.00)
- 12  select * from dual;
+SQL> INSERT ALL
+  2  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE)
+  3  	     VALUES(10010, 'Anderson', 'James', 615, 2933893, 0.00)
+  4  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE)
+  5  	     VALUES(10011, 'Kurtis', 'Elena', 713, 2753455, 0.00)
+  6  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE)
+  7  	     VALUES(10012, 'Smith', 'Kathy', 615, 2873453, 345.86)
+  8  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE)
+  9  	     VALUES(10013, 'Paul', 'Chris', 615, 2879998, 536.75)
+ 10  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE)
+ 11  	     VALUES(10014, 'Johnson', 'Bill', 615, 2455533, 0.00)
+ 12  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE)
+ 13  	     VALUES(10015, 'Samuels', 'Julia', 713, 2345432, 0.00)
+ 14  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE)
+ 15  	     VALUES(10016, 'Harris', 'Anne', 615, 2233445, 221.19)
+ 16  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE)
+ 17  	     VALUES(10017, 'Ford', 'Gustav', 615, 2223444, 768.93)
+ 18  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE)
+ 19  	     VALUES(10018, 'Lee', 'Ming', 713, 2323234, 216.55)
+ 20  INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE)
+ 21  	     VALUES(10019, 'Green', 'Walter', 615, 2786403, 0.00)
+ 22  SELECT * FROM dual;
 
 10 rows created.
 
-SQL>
+SQL> 
+SQL> DELETE FROM VENDOR;
+
+0 rows deleted.
+
 SQL> INSERT ALL
-  2  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(21225, 'Bryson, Inc.', 'Bella', 615, 2453628, 'TN', 'Y')
-  3  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(21226, 'SuperLoo, Inc.', 'Ching-Hun', 904, 3876330, 'FL', 'N')
-  4  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(21231, 'GnB Supply', 'Samson', 615, 2889922, 'TN', 'Y')
-  5  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(21344, 'Gomez Sons', 'Mark', 615, 2986363, 'KY', 'N')
-  6  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(22587, 'Downing, Inc.', 'Simon Singh', 901, 3985333, 'GA', 'N')
-  7  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(23119, 'Blackman Sisters', 'Svetlana', 901, 3562429, 'GA', 'Y')
-  8  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(24004, 'Almeda House', 'Almeda', 615, 2787878, 'TN', 'N')
-  9  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(24288, 'Justin Stores', 'Gracy Yu', 615, 2543333, 'TN', 'Y')
- 10  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(25443, 'Super Systems', 'Ted Hwang', 904, 3561111, 'FL', 'N')
- 11  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(25501, 'SilverminesLtd.', 'Anne White', 615, 2983455, 'TN', 'N')
- 12  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(25595, 'HighEnd Supplies', 'Smith', 904, 3098773, 'FL', 'Y')
- 13  SELECT * FROM dual;
+  2  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+  3  	     VALUES(21225, 'Bryson, Inc.', 'Bella', 615, 2453628, 'TN', 'Y')
+  4  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+  5  	     VALUES(21226, 'SuperLoo, Inc.', 'Ching-Hun', 904, 3876330, 'FL', 'N')
+  6  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+  7  	     VALUES(21231, 'GnB Supply', 'Samson', 615, 2889922, 'TN', 'Y')
+  8  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+  9  	     VALUES(21344, 'Gomez Sons', 'Mark', 615, 2986363, 'KY', 'N')
+ 10  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+ 11  	     VALUES(22587, 'Downing, Inc.', 'Simon Singh', 901, 3985333, 'GA', 'N')
+ 12  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+ 13  	     VALUES(23119, 'Blackman Sisters', 'Svetlana', 901, 3562429, 'GA', 'Y')
+ 14  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+ 15  	     VALUES(24004, 'Almeda House', 'Almeda', 615, 2787878, 'TN', 'N')
+ 16  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+ 17  	     VALUES(24288, 'Justin Stores', 'Gracy Yu', 615, 2543333, 'TN', 'Y')
+ 18  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+ 19  	     VALUES(25443, 'Super Systems', 'Ted Hwang', 904, 3561111, 'FL', 'N')
+ 20  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+ 21  	     VALUES(25501, 'SilverminesLtd.', 'Anne White', 615, 2983455, 'TN', 'N')
+ 22  INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+ 23  	     VALUES(25595, 'HighEnd Supplies', 'Smith', 904, 3098773, 'FL', 'Y')
+ 24  SELECT * FROM dual;
 
 11 rows created.
 
-SQL>
+SQL> 
+SQL> DELETE FROM INVOICE;
+
+0 rows deleted.
+
 SQL> INSERT ALL
   2  INTO INVOICE (INV_NUM, C_CODE, INV_DATE) VALUES(1001, 10014, '16-JAN-12')
   3  INTO INVOICE (INV_NUM, C_CODE, INV_DATE) VALUES(1002, 10011, '16-JAN-12')
@@ -125,28 +194,52 @@ SQL> INSERT ALL
 8 rows created.
 
 SQL> 
+SQL> DELETE FROM PRODUCT;
+
+0 rows deleted.
+
 SQL> INSERT ALL
-  2  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('AB112', 'Power Painter', '03-NOV-11', 8, 5, 109.99, 0.00, 25595)
-  3  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('SB725', '7.25in Saw Blade', '13-DEC-11', 32, 15, 14.99, 0.05, 21344)
-  4  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('SB900', '9.00 in Saw Blade', '13-NOV-11', 18, 12, 17.49, 0.00, 21344)
-  5  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('CL025', 'Hrd. Cloth 1/4in', '15-JAN-12', 15, 8, 39.95, 0.00, 23119)
-  6  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('CL050', 'Hrd. Cloth 1/2in', '15-JAN-12', 23, 5, 43.99, 0.00, 23119)
-  7  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('JB012', 'Jigsaw 12in Blade', '30-DEC-11', 8, 5, 109.92, 0.05, 24288)
-  8  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('JB008', 'Jigsaw 8in Blade', '24-DEC-11', 6, 5, 99.87, 0.05, 24288)
-  9  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('CD00X', 'Cordless Drill', '20-JAN-12', 12, 5, 38.95, 0.05, 25595)
- 10  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('CH10X', 'Claw Hammer', '20-JAN-12', 23, 10, 9.95, 0.10, 21225)
- 11  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('SH100', 'Sledge Hammer', '02-JAN-12', 8, 5, 14.40, 0.05, NULL)
- 12  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('RF100', 'Rat Tail File', '15-DEC-11', 43, 20, 4.99, 0.00, 21344)
- 13  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('HC100', 'Hicut Chain Saw', '07-FEB-12', 11, 5, 256.99, 0.05, 24288)
- 14  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('PP101', 'PVC Pipe', '20-FEB-12', 188, 75, 5.87, 0.00, NULL)
- 15  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('MC001', 'Metal Screw', '01-MAR-12', 172, 75, 6.99, 0.00, 21225)
- 16  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('WC025', '2.5in wide Screw', '24-FEB-12', 237, 100, 8.45, 0.00, 21231)
- 17  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('SM48X', 'Steel Malting Mesh', '17-JAN-12', 18, 5, 119.95, 0.10, 25595)
- 18  SELECT * FROM dual;
+  2  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+  3  	     VALUES('AB112', 'Power Painter', '03-NOV-11', 8, 5, 109.99, 0.00, 25595)
+  4  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+  5  	     VALUES('SB725', '7.25in Saw Blade', '13-DEC-11', 32, 15, 14.99, 0.05, 21344)
+  6  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+  7  	     VALUES('SB900', '9.00 in Saw Blade', '13-NOV-11', 18, 12, 17.49, 0.00, 21344)
+  8  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+  9  	     VALUES('CL025', 'Hrd. Cloth 1/4in', '15-JAN-12', 15, 8, 39.95, 0.00, 23119)
+ 10  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 11  	     VALUES('CL050', 'Hrd. Cloth 1/2in', '15-JAN-12', 23, 5, 43.99, 0.00, 23119)
+ 12  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 13  	     VALUES('JB012', 'Jigsaw 12in Blade', '30-DEC-11', 8, 5, 109.92, 0.05, 24288)
+ 14  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 15  	     VALUES('JB008', 'Jigsaw 8in Blade', '24-DEC-11', 6, 5, 99.87, 0.05, 24288)
+ 16  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 17  	     VALUES('CD00X', 'Cordless Drill', '20-JAN-12', 12, 5, 38.95, 0.05, 25595)
+ 18  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 19  	     VALUES('CH10X', 'Claw Hammer', '20-JAN-12', 23, 10, 9.95, 0.10, 21225)
+ 20  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 21  	     VALUES('SH100', 'Sledge Hammer', '02-JAN-12', 8, 5, 14.40, 0.05, NULL)
+ 22  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 23  	     VALUES('RF100', 'Rat Tail File', '15-DEC-11', 43, 20, 4.99, 0.00, 21344)
+ 24  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 25  	     VALUES('HC100', 'Hicut Chain Saw', '07-FEB-12', 11, 5, 256.99, 0.05, 24288)
+ 26  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 27  	     VALUES('PP101', 'PVC Pipe', '20-FEB-12', 188, 75, 5.87, 0.00, NULL)
+ 28  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 29  	     VALUES('MC001', 'Metal Screw', '01-MAR-12', 172, 75, 6.99, 0.00, 21225)
+ 30  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 31  	     VALUES('WC025', '2.5in wide Screw', '24-FEB-12', 237, 100, 8.45, 0.00, 21231)
+ 32  INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+ 33  	     VALUES('SM48X', 'Steel Malting Mesh', '17-JAN-12', 18, 5, 119.95, 0.10, 25595)
+ 34  SELECT * FROM dual;
 
 16 rows created.
 
 SQL> 
+SQL> DELETE FROM LINE;
+
+0 rows deleted.
+
 SQL> INSERT ALL
   2  INTO LINE (INV_NUM, L_NUM, P_CODE, L_UNITS, L_PRICE) VALUES(1001, 1, 'SB725', 1, 14.99)
   3  INTO LINE (INV_NUM, L_NUM, P_CODE, L_UNITS, L_PRICE) VALUES(1001, 2, 'CH10X', 1, 9.95)
@@ -170,42 +263,272 @@ SQL> INSERT ALL
 
 18 rows created.
 
+QUERY(3) For each table of SalesCo database, list all the enforced constraints. (Use USER_CONSTRAINTS table in Oracle‘s Data Catalog)
+SQL> 
+SQL> SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME LIKE 'CUSTOMER';
+
+CONSTRAINT_NAME                C                                                                    
+------------------------------ -                                                                    
+SYS_C0011628                   C                                                                    
+SYS_C0011629                   C                                                                    
+SYS_C0011630                   C                                                                    
+SYS_C0011631                   C                                                                    
+SYS_C0011632                   C                                                                    
+CUSTOMER_CHK_C_CODE            C                                                                    
+CUSTOMER_CHK_C_AREA            C                                                                    
+CUSTOMER_PK_C_CODE             P                                                                    
+
+8 rows selected.
+
+SQL> SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME LIKE 'VENDOR';
+
+CONSTRAINT_NAME                C                                                                    
+------------------------------ -                                                                    
+SYS_C0011639                   C                                                                    
+SYS_C0011640                   C                                                                    
+SYS_C0011641                   C                                                                    
+VENDOR_CHK_V_CODE              C                                                                    
+VENDOR_CHK_V_AREA              C                                                                    
+VENDOR_CHK_V_STATE             C                                                                    
+VENDOR_PK_V_CODE               P                                                                    
+SYS_C0011636                   C                                                                    
+SYS_C0011637                   C                                                                    
+SYS_C0011638                   C                                                                    
+
+10 rows selected.
+
+SQL> SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME LIKE 'INVOICE';
+
+CONSTRAINT_NAME                C                                                                    
+------------------------------ -                                                                    
+SYS_C0011646                   C                                                                    
+INVOICE_CHK_INV_NUM            C                                                                    
+INVOICE_PK_INV_NUM             P                                                                    
+INVOICE_FK_C_CODE              R                                                                    
+
+4 rows selected.
+
+SQL> SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME LIKE 'PRODUCT';
+
+CONSTRAINT_NAME                C                                                                    
+------------------------------ -                                                                    
+SYS_C0011650                   C                                                                    
+SYS_C0011651                   C                                                                    
+SYS_C0011652                   C                                                                    
+SYS_C0011653                   C                                                                    
+SYS_C0011654                   C                                                                    
+SYS_C0011655                   C                                                                    
+PRODUCT_CHK_P_MIN              C                                                                    
+PRODUCT_PK_P_CODE              P                                                                    
+PRODUCT_FK_V_CODE              R                                                                    
+
+9 rows selected.
+
+SQL> SELECT CONSTRAINT_NAME, CONSTRAINT_TYPE FROM USER_CONSTRAINTS WHERE TABLE_NAME LIKE 'LINE';
+
+CONSTRAINT_NAME                C                                                                    
+------------------------------ -                                                                    
+SYS_C0011659                   C                                                                    
+SYS_C0011660                   C                                                                    
+LINE_CHK_L_NUM                 C                                                                    
+INVOICE_CHK_L_UNITS            C                                                                    
+INVOICE_CHK_L_PRICE            C                                                                    
+LINE_PK_INV_NUM                P                                                                    
+LINE_FK_INV_NUM                R                                                                    
+LINE_FK_P_CODE                 R                                                                    
+
+8 rows selected.
+
+QUERY(4) List the contents of all the tables in the database. You must but set the display screen width appropriately using SET LINESIZE NN command.
+SQL> 
+SQL> SELECT * FROM CUSTOMER;
+
+    C_CODE LNAME      FNAME          C_AREA    C_PHONE    BALANCE                                   
+---------- ---------- ---------- ---------- ---------- ----------                                   
+     10010 Anderson   James             615    2933893          0                                   
+     10011 Kurtis     Elena             713    2753455          0                                   
+     10012 Smith      Kathy             615    2873453     345.86                                   
+     10013 Paul       Chris             615    2879998     536.75                                   
+     10014 Johnson    Bill              615    2455533          0                                   
+     10015 Samuels    Julia             713    2345432          0                                   
+     10016 Harris     Anne              615    2233445     221.19                                   
+     10017 Ford       Gustav            615    2223444     768.93                                   
+     10018 Lee        Ming              713    2323234     216.55                                   
+     10019 Green      Walter            615    2786403          0                                   
+
+10 rows selected.
+
+SQL> SELECT * FROM VENDOR;
+
+    V_CODE V_NAME                         V_CONTACT                V_AREA    V_PHONE V_ V           
+---------- ------------------------------ -------------------- ---------- ---------- -- -           
+     21225 Bryson, Inc.                   Bella                       615    2453628 TN Y           
+     21226 SuperLoo, Inc.                 Ching-Hun                   904    3876330 FL N           
+     21231 GnB Supply                     Samson                      615    2889922 TN Y           
+     21344 Gomez Sons                     Mark                        615    2986363 KY N           
+     22587 Downing, Inc.                  Simon Singh                 901    3985333 GA N           
+     23119 Blackman Sisters               Svetlana                    901    3562429 GA Y           
+     24004 Almeda House                   Almeda                      615    2787878 TN N           
+     24288 Justin Stores                  Gracy Yu                    615    2543333 TN Y           
+     25443 Super Systems                  Ted Hwang                   904    3561111 FL N           
+     25501 SilverminesLtd.                Anne White                  615    2983455 TN N           
+     25595 HighEnd Supplies               Smith                       904    3098773 FL Y           
+
+11 rows selected.
+
+SQL> SELECT * FROM INVOICE;
+
+   INV_NUM     C_CODE INV_DATE                                                                      
+---------- ---------- ---------                                                                     
+      1001      10014 16-JAN-12                                                                     
+      1002      10011 16-JAN-12                                                                     
+      1003      10012 16-JAN-12                                                                     
+      1004      10018 17-JAN-12                                                                     
+      1005      10011 17-JAN-12                                                                     
+      1006      10014 17-JAN-12                                                                     
+      1007      10015 17-JAN-12                                                                     
+      1008      10011 17-JAN-12                                                                     
+
+8 rows selected.
+
+SQL> SELECT * FROM PRODUCT;
+truncating (as requested) before column V_CODE
+
+
+P_COD DESCRIPT                       P_DATE           QTY      P_MIN    P_PRICE     P_DISC          
+----- ------------------------------ --------- ---------- ---------- ---------- ----------          
+AB112 Power Painter                  03-NOV-11          8          5     109.99          0          
+SB725 7.25in Saw Blade               13-DEC-11         32         15      14.99        .05          
+SB900 9.00 in Saw Blade              13-NOV-11         18         12      17.49          0          
+CL025 Hrd. Cloth 1/4in               15-JAN-12         15          8      39.95          0          
+CL050 Hrd. Cloth 1/2in               15-JAN-12         23          5      43.99          0          
+JB012 Jigsaw 12in Blade              30-DEC-11          8          5     109.92        .05          
+JB008 Jigsaw 8in Blade               24-DEC-11          6          5      99.87        .05          
+CD00X Cordless Drill                 20-JAN-12         12          5      38.95        .05          
+CH10X Claw Hammer                    20-JAN-12         23         10       9.95         .1          
+SH100 Sledge Hammer                  02-JAN-12          8          5       14.4        .05          
+RF100 Rat Tail File                  15-DEC-11         43         20       4.99          0          
+
+P_COD DESCRIPT                       P_DATE           QTY      P_MIN    P_PRICE     P_DISC          
+----- ------------------------------ --------- ---------- ---------- ---------- ----------          
+HC100 Hicut Chain Saw                07-FEB-12         11          5     256.99        .05          
+PP101 PVC Pipe                       20-FEB-12        188         75       5.87          0          
+MC001 Metal Screw                    01-MAR-12        172         75       6.99          0          
+WC025 2.5in wide Screw               24-FEB-12        237        100       8.45          0          
+SM48X Steel Malting Mesh             17-JAN-12         18          5     119.95         .1          
+
+16 rows selected.
+
+SQL> SELECT * FROM LINE;
+
+   INV_NUM      L_NUM P_COD    L_UNITS    L_PRICE                                                   
+---------- ---------- ----- ---------- ----------                                                   
+      1001          1 SB725          1      14.99                                                   
+      1001          2 CH10X          1       9.95                                                   
+      1002          1 RF100          2       4.99                                                   
+      1003          1 CD00X          1      38.95                                                   
+      1003          2 CL025          1      39.95                                                   
+      1003          3 SB725          5      14.99                                                   
+      1004          2 RF100          3       4.99                                                   
+      1004          3 CH10X          2       9.95                                                   
+      1005          1 PP101         12       5.87                                                   
+      1006          1 MC001          3       6.99                                                   
+      1006          2 JB012          1     109.92                                                   
+
+   INV_NUM      L_NUM P_COD    L_UNITS    L_PRICE                                                   
+---------- ---------- ----- ---------- ----------                                                   
+      1006          3 CH10X          1       9.95                                                   
+      1006          4 HC100          1     256.99                                                   
+      1007          1 SB725          2      14.99                                                   
+      1007          2 RF100          1       4.99                                                   
+      1008          1 PP101          5       5.87                                                   
+      1008          2 SM48X          3     119.95                                                   
+      1008          3 CH10X          1       9.95                                                   
+
+18 rows selected.
+
+
+QUERY(5) Write SQL code to insert a LINE record – 1009, 1, HH15X, 20, 5.50. What are the problems encountered? What are the additional requirements? Assume that the 200 units of the product ―Hanging Hook 15in‖ were supplied by ―Martha Associates‖ located in ―KY‘ at unit price of 5.75 on January 10, 2013. Minimum stock quantity was anticipated to be 25. The line was billed to Grace Dawson located in area 904 with phone 3562098 and a balance of 452.99 on June 22, 2013. The supplier with ID 24992 has a contact named ―Jasmine Ray‖ with phone 2863322.
+SQL> 
+SQL> INSERT INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE)
+  2  	     VALUES(10020, 'Dawson', 'Grace', 904, 3562098, 452.99);
+
+1 row created.
+
+SQL> INSERT INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER)
+  2  	     VALUES(24992, 'Martha Associates', 'Jasmine Ray', 615, 2863322, 'KY', 'N');
+
+1 row created.
+
+SQL> INSERT INTO INVOICE (INV_NUM, C_CODE, INV_DATE)
+  2  	     VALUES(1009, 10020, '22-JUN-13');
+
+1 row created.
+
+SQL> INSERT INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE)
+  2  	     VALUES('HH15X', 'Hanging Hook 15in', '10-JAN-13', 200, 25, 5.75, 0.00, 24992);
+
+1 row created.
+
+SQL> INSERT INTO LINE (INV_NUM, L_NUM, P_CODE, L_UNITS, L_PRICE)
+  2  	     VALUES (1009, 1, 'HH15X', 20, 5.50);
+
+1 row created.
+
+
+QUERY(6) Write the SQL code that will list P_CODE, DESCRIPT, V_CODE for all products that are some kind of blades.
+SQL> 
+SQL> SELECT P_CODE, DESCRIPT, V_CODE FROM PRODUCT WHERE DESCRIPT LIKE '%Blade';
+
+P_COD DESCRIPT                           V_CODE                                                     
+----- ------------------------------ ----------                                                     
+SB725 7.25in Saw Blade                    21344                                                     
+SB900 9.00 in Saw Blade                   21344                                                     
+JB012 Jigsaw 12in Blade                   24288                                                     
+JB008 Jigsaw 8in Blade                    24288                                                     
+
+4 rows selected.
+
+
+QUERY(7) Write the SQL code that will list for all zero-balance customers their names, phone numbers and customer IDs. You must but ensure that in the output the name is a single field that combines first name followed by last name of the customer.
+SQL> 
+SQL> SELECT C_CODE, FNAME, LNAME, C_PHONE FROM CUSTOMER WHERE BALANCE = 0.00;
+
+    C_CODE FNAME      LNAME         C_PHONE                                                         
+---------- ---------- ---------- ----------                                                         
+     10010 James      Anderson      2933893                                                         
+     10011 Elena      Kurtis        2753455                                                         
+     10014 Bill       Johnson       2455533                                                         
+     10015 Julia      Samuels       2345432                                                         
+     10019 Walter     Green         2786403                                                         
+
+5 rows selected.
+
+
+QUERY(8) Write the SQL code that will list all products which were added to inventory during 2012.
+SQL> 
+SQL> SELECT * FROM PRODUCT WHERE P_DATE > '31-DEC-2011' AND P_DATE < '01-JAN-2013';
+truncating (as requested) before column V_CODE
+
+
+P_COD DESCRIPT                       P_DATE           QTY      P_MIN    P_PRICE     P_DISC          
+----- ------------------------------ --------- ---------- ---------- ---------- ----------          
+CL025 Hrd. Cloth 1/4in               15-JAN-12         15          8      39.95          0          
+CL050 Hrd. Cloth 1/2in               15-JAN-12         23          5      43.99          0          
+CD00X Cordless Drill                 20-JAN-12         12          5      38.95        .05          
+CH10X Claw Hammer                    20-JAN-12         23         10       9.95         .1          
+SH100 Sledge Hammer                  02-JAN-12          8          5       14.4        .05          
+HC100 Hicut Chain Saw                07-FEB-12         11          5     256.99        .05          
+PP101 PVC Pipe                       20-FEB-12        188         75       5.87          0          
+MC001 Metal Screw                    01-MAR-12        172         75       6.99          0          
+WC025 2.5in wide Screw               24-FEB-12        237        100       8.45          0          
+SM48X Steel Malting Mesh             17-JAN-12         18          5     119.95         .1          
+
+10 rows selected.
+
 SQL> 
 SQL> COMMIT;
 
 Commit complete.
 
-SQL>
-SQL> INSERT INTO LINE (INV_NUM, L_NUM, P_CODE, L_UNITS, L_PRICE) VALUES (1009, 1, 'HH15X', 20, 5.50);
-INSERT INTO LINE (INV_NUM, L_NUM, P_CODE, L_UNITS, L_PRICE) VALUES (1009, 1, 'HH15X', 20, 5.50)
-*
-ERROR at line 1:
-ORA-02291: integrity constraint (CS663.LINE_FK_P_CODE) violated - parent key not found
-
-
-SQL>
-SQL> 
-SQL> INSERT INTO CUSTOMER(C_CODE, LNAME, FNAME, C_AREA, C_PHONE, BALANCE) VALUES(10020, 'Dawson', 'Grace', 904, 3562098, 452.99);
-
-1 row created.
-
-SQL> INSERT INTO VENDOR(V_CODE, V_NAME, V_CONTACT, V_AREA, V_PHONE, V_STATE, V_ORDER) VALUES(24992, 'Martha Associates', 'Jasmine Ray', 615, 2863322, 'KY', 'N');
-
-1 row created.
-
-SQL> INSERT INTO INVOICE (INV_NUM, C_CODE, INV_DATE) VALUES(1009, 10020, '22-JUN-13');
-
-1 row created.
-
-SQL> INSERT INTO PRODUCT (P_CODE , DESCRIPT, P_DATE, QTY, P_MIN, P_PRICE, P_DISC, V_CODE) VALUES('HH15X', 'Hanging Hook 15in', '10-JAN-13', 200, 25, 5.75, 0.00, 24992);
-
-1 row created.
-
-SQL> INSERT INTO LINE (INV_NUM, L_NUM, P_CODE, L_UNITS, L_PRICE) VALUES (1009, 1, 'HH15X', 20, 5.50);
-
-1 row created.
-
-SQL> 
-SQL> COMMIT;
-
-Commit complete.
+SQL> SPOOL OFF
