@@ -1,0 +1,39 @@
+SQL> 
+SQL> --QUERY(1) Write SQL code to establish the schema (including enforcement of integrity constraints). Populate DEPT with indicated tuples. [Note: While creating DEPT do not enforce the referential integrity constraint]. You should use default value for HOD while inserting tuples in DEPT. Also populate first 6 tuples in STAFF.
+SQL> DROP TABLE DEPT CASCADE CONSTRAINTS;
+
+Table dropped.
+
+SQL> CREATE TABLE DEPT (
+  2  	     DNAME VARCHAR2(25) NOT NULL,
+  3  	     BRANCH CHAR(2),
+  4  	     INTAKE NUMBER(2) NOT NULL,
+  5  	     YR_EST NUMBER(4) NOT NULL,
+  6  	     HOD NUMBER(3) DEFAULT 101,
+  7  	     CONSTRAINT dept_pk_branch PRIMARY KEY (BRANCH),
+  8  	     CONSTRAINT dept_chk_branch CHECK (BRANCH IN ('CS', 'IT', 'EN')),
+  9  	     CONSTRAINT dept_chk_intake CHECK (INTAKE IN (20, 30, 40)),
+ 10  	     CONSTRAINT dept_chk_yr_est CHECK (YR_EST > 2005)
+ 11  );
+
+Table created.
+
+SQL> 
+SQL> DELETE FROM DEPT;
+
+0 rows deleted.
+
+SQL> INSERT ALL
+  2  INTO DEPT(DNAME, BRANCH, INTAKE, YR_EST, HOD) VALUES('Computer Science', 'CS', 40, 2012, NULL)
+  3  INTO DEPT(DNAME, BRANCH, INTAKE, YR_EST, HOD) VALUES('Information Technology', 'IT', 20, 2013, NULL)
+  4  INTO DEPT(DNAME, BRANCH, INTAKE, YR_EST, HOD) VALUES('Electronics Engineering', 'EN', 30, 2014, NULL)
+  5  SELECT * FROM dual;
+
+3 rows created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF
