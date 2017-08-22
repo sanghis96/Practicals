@@ -12,3 +12,17 @@ Subjects in V Sem:-
 
 1. CN (Computer Networks): programs are coded in Java
 2. CG (Computer Graphics & GUI): programs are coded in C++
+
+
+Subjects in VI Sem:-
+
+1. DAA (Design and Analysis of Algorithms): programs are coded in Java
+2. DBMS (DataBase and Management Systems): programs are coded in SQL
+
+
+
+Subjects in VII Sem:-
+
+1. AOOT (Advanced Object Oriented Technologies): programs are coded in J2EE
+2. DS (Distributed Systems): programs are coded in Java
+
